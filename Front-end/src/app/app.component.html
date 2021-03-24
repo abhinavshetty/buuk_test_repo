@@ -17,10 +17,10 @@
   </div>
   <div class="row">
     <p-panel header="Test results" class="col-md-6">
-      <app-results></app-results>
+      <app-results [testCloseEvent]="showTestDialog"></app-results>
     </p-panel>
     <p-panel header="Test duration summary" class="col-md-6">
-      <app-durations></app-durations>
+      <app-durations [testCloseEvent]="showTestDialog"></app-durations>
     </p-panel>
   </div>
 </div>

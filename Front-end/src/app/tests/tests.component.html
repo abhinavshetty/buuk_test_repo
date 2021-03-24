@@ -1,8 +1,5 @@
 <div class="p-fluid" *ngIf="questionPaper">
     <p-card>
-        <ng-template pTemplate="title">
-
-        </ng-template>
         <ng-template pTemplate="content">
             <div class="p-field p-grid">
                 <label for="name">Your name</label>
@@ -10,11 +7,11 @@
                     class="p-inputtext-lg" />
             </div>
 
-            {{questionPaper.questions[currentQuestion].question}}
+            <h2>  {{questionPaper.questions[currentQuestion].question}}</h2>
 
             <div *ngFor="let option of questionPaper.questions[currentQuestion].options" class="p-field-checkbox">
-                <p-radioButton name="option" [(ngModel)]="currentAnswer.answer"></p-radioButton>
-                <label>{{option}}</label>
+                <p-radioButton name="option" [value]="option" [(ngModel)]="currentAnswer.answer"></p-radioButton>
+                <h4>{{option}}</h4>
             </div>
             <div class="p-field" *ngIf="currentAnswer.prompt">
                 {{ currentAnswer.prompt }}

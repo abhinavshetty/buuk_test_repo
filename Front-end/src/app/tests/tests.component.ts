@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 import { RadioControlRegistry } from 'primeng/radiobutton';
+import { runInThisContext } from 'vm';
 import { TestsService } from '../common/tests.service';
 import { Answer } from '../results/models/answer';
 import { AnswerPaper } from '../results/models/answer-paper';
@@ -21,7 +22,6 @@ export class TestsComponent implements OnInit {
   currentQuestion: number;
   currentAnswer: Answer;
   answerPaper: AnswerPaper;
-  selectedOptionForQuestion: string;
 
   constructor(private testsService: TestsService) { }
 
@@ -36,71 +36,58 @@ export class TestsComponent implements OnInit {
       answer1.question = this.questionPaper.questions[this.currentQuestion].question;
       this.answerPaper.answers.push(answer1);
       this.currentAnswer = answer1;
+      this.answerPaper.testStartTime = new Date();
     });
   }
 
   nextQuestion() {
-    if (this.selectedOptionForQuestion !== undefined && this.selectedOptionForQuestion !== null) {
-      if (this.answerPaper.answers.some(item => item.question === this.questionPaper.questions[this.currentQuestion].question)) {
-        this.answerPaper.answers.forEach(answer => {
-          if (answer.question === this.questionPaper.questions[this.currentQuestion].question) {
-            answer.answer = this.selectedOptionForQuestion;
-          }
-        });
-      } else {
-        let newAnswer = new Answer();
-        newAnswer.question = this.questionPaper.questions[this.currentQuestion].question;
-        newAnswer.answer = this.selectedOptionForQuestion;
-        this.answerPaper.answers.push(newAnswer);
-      }
-
-    }
     if (this.currentQuestion !== 3) {
       this.currentQuestion = this.currentQuestion + 1;
     }
 
+    this.currentAnswer = null;
     this.answerPaper.answers.forEach(answer => {
       if (answer.question === this.questionPaper.questions[this.currentQuestion].question) {
-        this.selectedOptionForQuestion = answer.answer;
+        this.currentAnswer = answer;
       }
     });
-
+    if (this.currentAnswer === null) {
+      let newAnswer = new Answer();
+      newAnswer.question = this.questionPaper.questions[this.currentQuestion].question;
+      this.answerPaper.answers.push(newAnswer);
+      this.currentAnswer = newAnswer;
+    }
   }
 
   previousQuestion() {
-    if (this.selectedOptionForQuestion !== undefined && this.selectedOptionForQuestion !== null) {
-      if (this.answerPaper.answers.some(item => item.question === this.questionPaper.questions[this.currentQuestion].question)) {
-        this.answerPaper.answers.forEach(answer => {
-          if (answer.question === this.questionPaper.questions[this.currentQuestion].question) {
-            answer.answer = this.selectedOptionForQuestion;
-          }
-        });
-      } else {
-        let newAnswer = new Answer();
-        newAnswer.question = this.questionPaper.questions[this.currentQuestion].question;
-        newAnswer.answer = this.selectedOptionForQuestion;
-        this.answerPaper.answers.push(newAnswer);
-      }
-
-    }
     if (this.currentQuestion !== 0) {
       this.currentQuestion = this.currentQuestion - 1;
     }
 
+    this.currentAnswer = null;
     this.answerPaper.answers.forEach(answer => {
       if (answer.question === this.questionPaper.questions[this.currentQuestion].question) {
-        this.selectedOptionForQuestion = answer.answer;
+        this.currentAnswer = answer;
       }
     });
+    if (this.currentAnswer === null) {
+      let newAnswer = new Answer();
+      newAnswer.question = this.questionPaper.questions[this.currentQuestion].question;
+      this.answerPaper.answers.push(newAnswer);
+      this.currentAnswer = newAnswer;
+    }
   }
 
   completeTest() {
     // make service call to send the test result
+    let endTime = new Date();
+    let duration = endTime.getTime() - this.answerPaper.testStartTime.getTime();
+    duration = duration / 60000;
+    this.answerPaper.testDuration = duration;
     this.answerPaper.id = Math.floor(Math.random() * 1000);
     this.testsService.submitAnswers(this.answerPaper).subscribe(response => {
       this.answerPaper = response;
-    })
-    this.testCloseAction.emit(true);
+    });
   }
 
   closeTest() {

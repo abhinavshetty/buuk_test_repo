@@ -1,3 +1,4 @@
+import { Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import * as CanvasJS from 'src/assets/canvasjs.min';
 import { ResultsService } from '../common/results.service';
@@ -7,7 +8,9 @@ import { ResultsService } from '../common/results.service';
   templateUrl: './durations.component.html',
   styleUrls: ['./durations.component.css']
 })
-export class DurationsComponent implements OnInit {
+export class DurationsComponent implements OnInit, OnChanges {
+  @Input() testCloseEvent: boolean;
+  
   chart = new CanvasJS.Chart("durationChartContainer", {
     animationEnabled: true,
     exportEnabled: true,
@@ -20,6 +23,9 @@ export class DurationsComponent implements OnInit {
     }]
   });
   constructor(private resultsService: ResultsService) { }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.initializeChart();
+  }
 
   ngOnInit() {
     this.initializeChart();
