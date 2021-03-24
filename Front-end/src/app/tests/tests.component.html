@@ -1,5 +1,33 @@
-<p>tests works!</p>
-<p-button label="Ok" [style]="{background:'green'}" (onClick)="completeTest()">
-</p-button>
-<p-button label="Close" [style]="{background:'red'}" (onClick)="closeTest()">
-</p-button>
+<div class="p-fluid">
+    <p-card>
+        <ng-template pTemplate="title">
+            {{questionPaper.questions[currentQuestion].question}}
+        </ng-template>
+        <ng-template pTemplate="content">
+            <ul class="p-fluid">
+                <li class="p-field" *ngFor="let option of questionPaper.questions[currentQuestion].options">
+                    <h4>{{ option }}</h4>
+                </li>
+                
+            </ul>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <div class="p-formgrid p-grid">
+                <div class="p-field p-col">
+                    <p-button label="Previous" (onClick)="previousPage()" icon="pi pi-angle-left" iconPos="left"></p-button>
+                </div>
+                <div class="p-field p-nogutter p-col">
+                    <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
+                </div>
+            </div>
+            
+        </ng-template>
+    </p-card>
+
+    <div class="p-field p-d-flex">
+        <p-button label="Ok" [style]="{background:'green'}" (onClick)="completeTest()">
+        </p-button>
+        <p-button label="Close" [style]="{background:'red'}" (onClick)="closeTest()">
+        </p-button>
+    </div>
+</div>

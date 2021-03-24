@@ -10,8 +10,12 @@ import { DurationsComponent } from './durations/durations.component';
 import { TestsComponent } from './tests/tests.component';
 import { ButtonModule } from 'primeng/button';
 import { PanelModule } from 'primeng/panel';
-
+import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
+import { CardModule } from 'primeng/card';
+import { RadioButtonModule } from 'primeng/radiobutton';
+
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -24,10 +28,14 @@ import { DialogModule } from 'primeng/dialog';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     ButtonModule,
+    CardModule,
+    RadioButtonModule,
     PanelModule,
     FormsModule,
     DialogModule,
+    TableModule,
     ReactiveFormsModule
   ],
   providers: [],

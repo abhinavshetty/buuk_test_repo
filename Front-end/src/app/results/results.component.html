@@ -1,1 +1,18 @@
-<p>results works!</p>
+<p-table [value]="allResults" dataKey="id">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Test ID</th>
+            <th>Name</th>
+            <th>Final test score</th>
+            <th>Test start time</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-result>
+        <tr>
+            <td>{{result.id}}</td>
+            <td>{{result.name}}</td>
+            <td>{{result.finalScore}}</td>
+            <td>{{result.testStartTime}}</td>
+        </tr>
+    </ng-template>
+</p-table>
