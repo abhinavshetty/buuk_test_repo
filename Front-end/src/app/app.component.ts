@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Front-end';
+  showTestDialog = false;
+
+  onTestTakeClick() {
+    this.showTestDialog = true;
+  }
+
+  testClosed(event) {
+    this.showTestDialog = false;
+  }
 }
