@@ -2,22 +2,17 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { TestsControllerService } from './tests-controller.service';
 import { AnswerPaper } from './dto/answer-paper';
 
-@Controller('tests-controller')
+@Controller('test')
 export class TestsControllerController {
   constructor(private readonly testsControllerService: TestsControllerService) {}
 
-  @Post()
+  @Post('submitAnswers')
   submitAnswers(@Body() answerPaper: AnswerPaper) {
     return this.testsControllerService.submitAnswers(answerPaper);
   }
 
-  @Get()
+  @Get('getQuestionPaper')
   getQuestionPaper() {
     return this.testsControllerService.getQuestionPaper();
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.testsControllerService.remove(+id);
   }
 }
