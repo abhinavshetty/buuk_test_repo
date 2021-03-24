@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { AllResults } from './dto/allResults';
 
 @Injectable()
-export class ResultsControllerService {
+export class ResultsService {
   getResults() {
     return AllResults.results;
   }

@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { AllResults } from 'src/results-controller/dto/allResults';
+import { AllResults } from 'src/results/dto/allResults';
 import { AnswerPaper } from './dto/answer-paper';
 import { Question } from './dto/question';
 import { QuestionPaper } from './dto/question-paper';
-@Injectable()
-export class TestsControllerService {
 
+@Injectable()
+export class TestsService {
   questionSet = [
     { question: '1 + 1 = ?', options: ['1', '0', '2', '3'], correct: '2' },
     { question: '(a + b)^2 = ?', options: ['a^2 + b^2 + 2*a*b', 'a^2 + b^2', '2*(a^2)*(b^2)'], correct: 'a^2 + b^2 + 2*a*b' },
