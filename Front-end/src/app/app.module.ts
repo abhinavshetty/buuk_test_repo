@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { ResultsComponent } from './results/results.component';
 import { DurationsComponent } from './durations/durations.component';
 import { TestsComponent } from './tests/tests.component';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { TestsComponent } from './tests/tests.component';
     TestsComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
