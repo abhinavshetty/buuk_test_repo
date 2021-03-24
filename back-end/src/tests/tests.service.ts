@@ -14,7 +14,7 @@ export class TestsService {
     { question: '2 + 3 = ?', options: ['7', '23', '32', '5'], correct: '5' },
     { question: 'dx^2/dx = ?', options: ['x', '1', '2x', '0'], correct: '2x' },
     { question: 'd(1/x)/dx = ?', options: ['1', '-1/x^2', '1/2x', '-1/2x'], correct: '-1/x^2' },
-    { question: '1 + 2 + 4 + 8 + 16 + ...', options: ['x', '1', '2x', '0'], correct: '2x' }
+    { question: '1 + 2 + 4 + 8 + 16 + ... n terms = ?', options: ['n(n+1)/2', '(2^n - 1)', '2^n', 'n^2 + 2n'], correct: '2^n - 1' }
   ];
 
   submitAnswers(answerPaper: AnswerPaper) {
